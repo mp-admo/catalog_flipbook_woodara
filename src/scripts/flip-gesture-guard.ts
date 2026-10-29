@@ -24,6 +24,9 @@ export function initializeFlipGestureGuard() {
       return;
     }
 
+    // Mobile uses its own horizontal swipe handler rather than PageFlip mouse events.
+    if (page.closest(".stf__wrapper")?.classList.contains("--portrait")) return;
+
     const point = getPointerPosition(event);
     if (!point) return;
 
@@ -39,9 +42,8 @@ export function initializeFlipGestureGuard() {
     const rightZoneWidth = cardBounds.length
       ? Math.max(0, bounds.right - Math.max(...cardBounds.map((card) => card.right)) - edgeGap)
       : fallbackZoneWidth;
-    const isPortrait = page.closest(".stf__wrapper")?.classList.contains("--portrait");
-    const isLeftTurnZone = (isPortrait || page.classList.contains("--left")) && x <= leftZoneWidth;
-    const isRightTurnZone = (isPortrait || page.classList.contains("--right")) && x >= bounds.width - rightZoneWidth;
+    const isLeftTurnZone = page.classList.contains("--left") && x <= leftZoneWidth;
+    const isRightTurnZone = page.classList.contains("--right") && x >= bounds.width - rightZoneWidth;
 
     // PageFlip receives events on its parent. Only the narrow outer strips may start a flip.
     if (!isLeftTurnZone && !isRightTurnZone) {

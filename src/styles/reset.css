@@ -1,0 +1,38 @@
+/* Убираем внешние отступы у дефолтных элементов */
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+/* Выравниваем расчет размеров (border и padding не раздувают элементы) */
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Убираем отступы у списков (то, что мы уже сделали) */
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none; /* Опционально: убирает точки у всех списков */
+}
+
+/* Упрощаем работу с изображениями */
+img, picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Наследуем шрифты для полей ввода и кнопок */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* Полезно для плавного скролла (если пользователь не отключил его в системе) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

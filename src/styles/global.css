@@ -1,0 +1,32 @@
+@import "./fonts.css";
+
+:root {
+    --color-accent: #4C9141;
+    --color-text-primary: #151516;
+    --color-text-secondary: #58585A;
+    --color-background: #F4F3F0;
+    --color-border: #888888;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem; 
+}
+
+@media (max-width: 768px) {
+
+    html {
+        scroll-padding-top: 2rem;
+    }
+
+}
+
+body {
+    font-family: 'Outfit';
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #fff;
+    background-color: var(--color-background);
+    margin: 0;
+}

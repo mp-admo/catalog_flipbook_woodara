@@ -10,6 +10,26 @@
   color: var(--color-text-primary);
 }
 
+.catalog,
+.catalog * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  
+  /* Отключает синюю вспышку при клике (тапе) на смартфонах */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Отключает синий/черный контур (фокус) при клике на десктопе */
+.catalog *:focus {
+  outline: none;
+}
+
+.catalog img {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
 .catalog__book {
   width: min(100%, 180rem, calc((100svh - 8rem) * 2.8));
   filter: drop-shadow(0 2.4rem 3.2rem rgb(21 21 22 / 12%));

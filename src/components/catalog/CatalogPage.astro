@@ -1,0 +1,26 @@
+---
+import type { CatalogPageData, Product } from "../../data/catalog";
+import ProductCard from "./ProductCard.astro";
+
+const { page, products = [] } = Astro.props as { page: CatalogPageData; products?: Product[] };
+---
+
+<section id={page.id} class:list={["catalog-page", `catalog-page--${page.kind}`]} aria-label={`Catalog page ${page.pageNumber}`}>
+  <span class="catalog-page__category" aria-hidden="true">{page.categoryLabel}</span>
+
+  {page.kind === "category" ? (
+    <>
+      <img class="catalog-page__hero" src={page.image} alt="" />
+      <div class="catalog-page__intro">
+        <h1>{page.title}<span>{page.subtitle}</span></h1>
+        <p>{page.description}</p>
+      </div>
+    </>
+  ) : (
+    <div class="catalog-page__grid">
+      {products.map((product) => <ProductCard product={product} headingId={`${page.id}-${product.id}-name`} />)}
+    </div>
+  )}
+
+  <span class="catalog-page__number" aria-label={`Page ${page.pageNumber}`}>{page.pageNumber}</span>
+</section>

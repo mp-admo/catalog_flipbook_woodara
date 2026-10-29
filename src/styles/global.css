@@ -4,7 +4,8 @@
     --color-accent: #4C9141;
     --color-text-primary: #151516;
     --color-text-secondary: #58585A;
-    --color-background: #F4F3F0;
+    --color-background-dark: #151516;
+    --color-background-light: #F4F3F0;
     --color-border: #888888;
 }
 
@@ -27,6 +28,6 @@ body {
     font-size: 1.4rem;
     font-weight: 400;
     color: #fff;
-    background-color: var(--color-background);
+    background-color: var(--color-background-dark);
     margin: 0;
 }

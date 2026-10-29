@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Dining chair category placeholder</title>
+  <desc id="desc">Dark studio composition with a stylised woven chair.</desc>
+  <defs>
+    <radialGradient id="bg" cx="72%" cy="42%" r="75%"><stop stop-color="#2b2621"/><stop offset="1" stop-color="#080808"/></radialGradient>
+    <linearGradient id="wood" x1="0" x2="1"><stop stop-color="#8e5a30"/><stop offset=".5" stop-color="#d49c61"/><stop offset="1" stop-color="#70411f"/></linearGradient>
+  </defs>
+  <rect width="1400" height="1000" fill="url(#bg)"/>
+  <ellipse cx="960" cy="850" rx="380" ry="75" fill="#000" opacity=".45"/>
+  <g fill="none" stroke="url(#wood)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M800 130 L755 630 M1080 130 L1150 825 M775 635 L705 855 M1110 635 L1025 855" stroke-width="42"/>
+    <path d="M750 185 Q915 120 1080 185" stroke-width="45"/>
+    <path d="M780 255 H1065 M772 320 H1080 M765 385 H1090 M755 450 H1100 M750 515 H1110" stroke="#c99b69" stroke-width="17"/>
+    <path d="M735 575 Q915 505 1120 575 L1100 660 Q915 625 755 670 Z" fill="#b9824c" stroke-width="25"/>
+    <path d="M750 665 H1115 M770 745 H1080" stroke-width="28"/>
+  </g>
+</svg>

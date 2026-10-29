@@ -1,0 +1,75 @@
+---
+import "../../styles/catalog.css";
+import { catalogPages, mobileCatalogPages, products } from "../../data/catalog";
+import CatalogPage from "./CatalogPage.astro";
+
+const productsById = new Map(products.map((product) => [product.id, product]));
+---
+
+<section class="catalog catalog--desktop" data-catalog-mode="desktop" aria-label="Woodara catalog">
+  <div class="catalog__book">
+    {catalogPages.map((page) => (
+      <CatalogPage
+        page={page}
+        products={page.kind === "products" ? page.productIds.map((id) => productsById.get(id)).filter(Boolean) : []}
+      />
+    ))}
+  </div>
+  <p class="catalog__hint">Drag a page corner or swipe to turn the page</p>
+</section>
+
+<section class="catalog catalog--mobile" data-catalog-mode="mobile" aria-label="Woodara catalog, mobile version">
+  <div class="catalog__book">
+    {mobileCatalogPages.map((page) => (
+      <CatalogPage
+        page={page}
+        products={page.kind === "products" ? page.productIds.map((id) => productsById.get(id)).filter(Boolean) : []}
+      />
+    ))}
+  </div>
+  <p class="catalog__hint">Swipe or drag the outer edge to turn the page</p>
+</section>
+
+<script>
+  import { PageFlip } from "page-flip";
+  import { initializeFavorites } from "../../scripts/favorites";
+  import { initializeFlipGestureGuard } from "../../scripts/flip-gesture-guard";
+
+  const mobileMediaQuery = window.matchMedia("(max-width: 767px)");
+  const mode = mobileMediaQuery.matches ? "mobile" : "desktop";
+  const catalog = document.querySelector<HTMLElement>(`[data-catalog-mode="${mode}"]`);
+  const book = catalog?.querySelector<HTMLElement>(".catalog__book");
+
+  if (book instanceof HTMLElement && book.dataset.pageFlipReady !== "true") {
+    const pages = Array.from(book.querySelectorAll(".catalog-page"));
+
+    if (pages.length > 0) {
+      book.dataset.pageFlipReady = "true";
+
+      const pageFlip = new PageFlip(book, {
+        width: mode === "mobile" ? 390 : 700,
+        height: mode === "mobile" ? 560 : 500,
+        size: "stretch",
+        minWidth: mode === "mobile" ? 280 : 320,
+        maxWidth: mode === "mobile" ? 480 : 900,
+        minHeight: mode === "mobile" ? 402 : 357,
+        maxHeight: mode === "mobile" ? 690 : 643,
+        usePortrait: mode === "mobile",
+        drawShadow: true,
+        maxShadowOpacity: 0.35,
+        flippingTime: 750,
+        mobileScrollSupport: true,
+        swipeDistance: 30,
+        clickEventForward: true,
+        showPageCorners: false,
+        disableFlipByClick: false,
+      });
+
+      pageFlip.loadFromHTML(pages);
+      initializeFavorites();
+      initializeFlipGestureGuard();
+    }
+  }
+
+  mobileMediaQuery.addEventListener("change", () => window.location.reload());
+</script>

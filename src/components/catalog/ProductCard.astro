@@ -1,0 +1,33 @@
+---
+import type { Product } from "../../data/catalog";
+
+const { product, headingId } = Astro.props as { product: Product; headingId: string };
+const details = [
+  { label: "Type", value: product.type },
+  { label: "Dimensions", value: product.dimensions, className: "product-item__details--dimensions" },
+  { label: "Material", value: product.material },
+  { label: "Color", value: product.color },
+  { label: "Additional specs", value: product.additionalSpecs },
+  { label: "Product code", value: product.productCode },
+];
+---
+
+<article class="product-item" aria-labelledby={headingId}>
+  <button class="product-item__favorite" type="button" data-favorite-id={product.id} aria-pressed="false" aria-label={`Add ${product.name} to favorites`}>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3L2.9 9.4l6.3-.9Z" /></svg>
+  </button>
+  <figure class="product-item__media">
+    <img src={product.image} alt={product.name} loading="lazy" />
+  </figure>
+  <div class="product-item__content">
+    <h3 id={headingId}>{product.name}</h3>
+    <dl class="product-item__details">
+      {details.filter((detail) => detail.value).map((detail) => (
+        <div class={detail.className}>
+          <dt>{detail.label}</dt>
+          <dd>{detail.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</article>
